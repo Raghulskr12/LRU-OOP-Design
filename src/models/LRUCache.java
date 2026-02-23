@@ -33,8 +33,8 @@ public class LRUCache {
 
     public void deleteNode(Node node)
     {
-        Node n1 = node.next;
-        Node n2 = node.prev;
+        Node n1 = node.prev;
+        Node n2 = node.next;
         n1.next= n2;
         n2.prev=n1;
     }
@@ -59,14 +59,33 @@ public class LRUCache {
     {
         if(storage.size()==capacity)
         {
-            Node n1 = tail.prev;
+            if(storage.containsKey(key))
+            {
+                Node n1 = storage.get(key);
+                n1.value = value;
+                deleteNode(n1);
+                insertAtHead(n1);
 
+            }
+            else {
+                Node n1 = tail.prev;
+
+                deleteNode(n1);
+                storage.remove(n1.key);
+                Node n2 = new Node(key, value);
+
+                insertAtHead(n2);
+                storage.put(key, n2);
+            }
+        }
+
+        else if(storage.containsKey(key))
+        {
+            Node n1 = storage.get(key);
+            n1.value = value;
             deleteNode(n1);
-            storage.remove(key);
-            Node n2= new Node(key,value);
+            insertAtHead(n1);
 
-            insertAtHead(n2);
-            storage.put(key,n2);
         }
         else {
             Node n2= new Node(key,value);

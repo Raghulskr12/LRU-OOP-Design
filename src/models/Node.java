@@ -8,7 +8,7 @@ public class Node {
     public Node next;
     public Node prev;
 
-    Node(int value,int key)
+    Node(int key,int value)
     {
         this.key=key;
         this.value=value;
