@@ -1,12 +1,13 @@
 package service;
 
 import models.LRUCache;
+import models.Node;
 
 public class LRUService {
 
     public  LRUCache cache;
 
-    LRUService(int capacity) {
+    public LRUService(int capacity) {
         this.cache = new LRUCache(capacity);
     }
 
@@ -18,7 +19,7 @@ public class LRUService {
 
     public void get(int key)
     {
-        int ans = cache.get(key);
+       int ans = cache.get(key);
         System.out.println("The value is :" + ans);
     }
 }
