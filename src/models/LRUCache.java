@@ -57,7 +57,23 @@ public class LRUCache {
 
     public void put(int key,int value)
     {
+        if(storage.size()==capacity)
+        {
+            Node n1 = tail.prev;
 
+            deleteNode(n1);
+            storage.remove(key);
+            Node n2= new Node(key,value);
+
+            insertAtHead(n2);
+            storage.put(key,n2);
+        }
+        else {
+            Node n2= new Node(key,value);
+
+            insertAtHead(n2);
+            storage.put(key,n2);
+        }
     }
 
 
